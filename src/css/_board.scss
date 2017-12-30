@@ -1,0 +1,111 @@
+.container {
+	width: 100%;
+	display: grid;
+	margin-top: 20px;
+	grid-template-columns: 1fr 1fr 1fr;
+	justify-items: center;
+	align-items: start;
+
+	.create-board {
+		width: 350px;
+		height: auto;
+		padding: 40px;
+		border-radius: 10px;
+		background: #9fe7a4;
+		font-size: 1.1rem;
+
+		.create-header {
+			height: 50px;
+			border-bottom: 1px white solid;
+			color: white;
+
+			i {
+				float: right;
+				font-size: 1.3rem;
+
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+
+		.create-body {
+			margin-top: 10px;
+
+			.input {
+
+				input {
+					width: 100%;
+					padding: 15px;
+					margin-bottom: 10px;
+					border-radius: 5px;
+					outline: none;
+
+					&:focus {
+						border: 2px #81b4e8 solid;
+					}
+				}
+			}
+
+			button {
+				margin-top: 25px;
+				margin-left: 25px;
+				font-size: .9rem;
+
+				&.cancel {
+					border: none;
+					outline: none;
+					background: transparent;
+					color: #f7f7f7;
+					font-weight: 800;
+					text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+					&:hover {
+						cursor: pointer;
+					}
+				}
+
+				&.create {
+					padding: 15px 30px;
+					border: none;
+					outline: none;
+					background: lightgrey;
+					font-weight: 100;
+					letter-spacing: .0625rem;
+
+					&:hover {
+						cursor: pointer;
+						color: #81b4e8;
+					}
+				}
+			}
+		}
+	}
+
+	.board {
+		width: 350px;
+		height: 125px;
+		margin: 20px;
+		padding-top: 55px;
+		border-radius: 15px;
+		background: #fffefc;
+		text-align: center;
+		font-size: 1.3rem;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
+
+
+
+
+.list-container {
+	width: 190px;
+	margin: 10px;
+	text-align: center;
+	display: inline-block;
+}

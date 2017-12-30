@@ -1,0 +1,303 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700");
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol,
+ul {
+  list-style: none; }
+
+blockquote,
+q {
+  quotes: none; }
+
+blockquote:after,
+blockquote:before,
+q:after,
+q:before {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.container {
+  width: 100%;
+  display: grid;
+  margin-top: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: start; }
+  .container .create-board {
+    width: 350px;
+    height: auto;
+    padding: 40px;
+    border-radius: 10px;
+    background: #9fe7a4;
+    font-size: 1.1rem; }
+    .container .create-board .create-header {
+      height: 50px;
+      border-bottom: 1px white solid;
+      color: white; }
+      .container .create-board .create-header i {
+        float: right;
+        font-size: 1.3rem; }
+        .container .create-board .create-header i:hover {
+          cursor: pointer; }
+    .container .create-board .create-body {
+      margin-top: 10px; }
+      .container .create-board .create-body .input input {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        outline: none; }
+        .container .create-board .create-body .input input:focus {
+          border: 2px #81b4e8 solid; }
+      .container .create-board .create-body button {
+        margin-top: 25px;
+        margin-left: 25px;
+        font-size: .9rem; }
+        .container .create-board .create-body button.cancel {
+          border: none;
+          outline: none;
+          background: transparent;
+          color: #f7f7f7;
+          font-weight: 800;
+          text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; }
+          .container .create-board .create-body button.cancel:hover {
+            cursor: pointer; }
+        .container .create-board .create-body button.create {
+          padding: 15px 30px;
+          border: none;
+          outline: none;
+          background: lightgrey;
+          font-weight: 100;
+          letter-spacing: .0625rem; }
+          .container .create-board .create-body button.create:hover {
+            cursor: pointer;
+            color: #81b4e8; }
+  .container .board {
+    width: 350px;
+    height: 125px;
+    margin: 20px;
+    padding-top: 55px;
+    border-radius: 15px;
+    background: #fffefc;
+    text-align: center;
+    font-size: 1.3rem;
+    text-decoration: none; }
+    .container .board:hover {
+      text-decoration: none; }
+
+.list-container {
+  width: 190px;
+  margin: 10px;
+  text-align: center;
+  display: inline-block; }
+
+.create-list {
+  width: 300px;
+  height: 125px;
+  margin: 20px;
+  padding: 20px;
+  background: #fffefc;
+  -webkit-box-shadow: 0px 4px 5px 2px #c4c4c4;
+  -moz-box-shadow: 0px 4px 5px 2px #c4c4c4;
+  box-shadow: 0px 4px 5px 2px #c4c4c4; }
+  .create-list input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    -webkit-box-shadow: 0px 2px 5px 0px #c4c4c4;
+    -moz-box-shadow: 0px 2px 5px 0px #c4c4c4;
+    box-shadow: 0px 2px 5px 0px #c4c4c4; }
+  .create-list button {
+    position: relative;
+    left: 250px;
+    bottom: 18px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #9fe7a4;
+    font-size: 1.3rem; }
+
+.list-container {
+  width: 300px;
+  margin: 20px;
+  padding: 0 15px 10px 15px;
+  background: #fffefc;
+  vertical-align: top; }
+  .list-container hr {
+    border-style: double;
+    border-width: 2px;
+    color: white; }
+  .list-container h1 {
+    display: inline-block;
+    height: 20px;
+    padding-top: 15px;
+    font-size: 1.3rem; }
+  .list-container button {
+    display: inline-block;
+    float: right;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: red;
+    font-size: 1.3rem; }
+    .list-container button.delete-list {
+      position: relative;
+      left: 15px;
+      top: 2px; }
+  .list-container input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    -webkit-box-shadow: 0px 2px 5px 0px #c4c4c4;
+    -moz-box-shadow: 0px 2px 5px 0px #c4c4c4;
+    box-shadow: 0px 2px 5px 0px #c4c4c4; }
+  .list-container ul {
+    width: 100%;
+    min-height: 50px;
+    padding-bottom: 20px; }
+    .list-container ul li {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px 0px 10px 10px;
+      border-radius: 10px;
+      background: #dbfce0;
+      text-align: left;
+      cursor: move;
+      -webkit-box-shadow: 0px 4px 5px 2px #c4c4c4;
+      -moz-box-shadow: 0px 4px 5px 2px #c4c4c4;
+      box-shadow: 0px 4px 5px 2px #c4c4c4; }
+      .list-container ul li span {
+        display: inline-block;
+        max-width: 75%; }
+      .list-container ul li button {
+        float: right;
+        font-size: 1rem; }
+
+.board-delete {
+  float: right;
+  margin-right: 50px; }
+
+*,
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  scroll-direction: horizontal; }
+
+body {
+  background: #ebedee; }
+  body button:hover {
+    cursor: pointer; }
