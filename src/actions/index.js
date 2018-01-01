@@ -6,6 +6,8 @@ export const CREATE_TASK = 'create_task';
 export const DELETE_TASK = 'delete_task';
 export const MOVE_CARD = 'move_card';
 export const INSERT_PLACEHOLDER = 'insert_placeholder';
+export const PUSH_CARD = 'push_card';
+export const REMOVE_CARD = 'remove_card';
 
 export function createBoard(values) {
 	const timestamp = Date.now();
@@ -79,17 +81,52 @@ export function deleteTask(boardId, listId, index) {
 	}
 }
 
-export function moveCard(boardId, sourceListId, sourceTaskId, sourceIndex, targetListId, targetTaskId, targetIndex) {
+// export function moveCard(boardId, sourceListId, sourceTaskId, sourceIndex, targetListId, targetTaskId, targetIndex) {
+// 	return dispatch => {
+// 		dispatch({
+// 			type: MOVE_CARD,
+// 			boardId,
+// 			sourceListId,
+// 			sourceTaskId,
+// 			sourceIndex,
+// 			targetListId,
+// 			targetTaskId,
+// 			targetIndex
+// 		});
+// 	}
+// }
+
+export function moveCard(boardId, sourceListId, targetListId, dragIndex, hoverIndex) {
 	return dispatch => {
 		dispatch({
 			type: MOVE_CARD,
+			dragIndex,
+			hoverIndex,
 			boardId,
 			sourceListId,
-			sourceTaskId,
-			sourceIndex,
-			targetListId,
-			targetTaskId,
-			targetIndex
+			targetListId
+		});
+	}
+}
+
+export function pushCard(boardId, listId, card) {
+	return dispatch => {
+		dispatch({
+			type: PUSH_CARD,
+			card,
+			boardId,
+			listId
+		});
+	}
+}
+
+export function removeCard(boardId, listId, index) {
+	return dispatch => {
+		dispatch({
+			type: REMOVE_CARD,
+			index	,
+			boardId,
+			listId
 		});
 	}
 }

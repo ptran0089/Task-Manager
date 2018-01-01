@@ -27,9 +27,10 @@ class List extends Component {
 		const cards = [];
 
 		if (tasks) {
-			tasks.forEach((task, i) => {
+			tasks.forEach((task, i) => {		
 				cards.push(
 					<Task
+						state={this.state}
 						key={i}
 						index={i}
 						task={task} 
@@ -37,6 +38,7 @@ class List extends Component {
 						boardId={boardId} 
 						listId={listId} 
 						handleTaskDelete={handleTaskDelete}
+						setPlaceholderIndex={this.setPlaceholderIndex}
 					/>
 				);
 			});

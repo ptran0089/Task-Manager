@@ -1,10 +1,35 @@
-import { CREATE_BOARD, DELETE_BOARD, CREATE_LIST, DELETE_LIST, CREATE_TASK, DELETE_TASK, MOVE_CARD } from '../actions';
+import update from 'immutability-helper';
+
+import { CREATE_BOARD, DELETE_BOARD, CREATE_LIST, DELETE_LIST, CREATE_TASK, DELETE_TASK, MOVE_CARD, REMOVE_CARD } from '../actions';
 
 export default function(state = {}, action) {
 	const boards = {...state};
 	const { values, key, boardId, listId, index } = action;
-	const { sourceListId, sourceTaskId, sourceIndex, targetListId, targetTaskId, targetIndex } = action;
-	
+	const { sourceListId, targetListId } = action;
+	const { dragIndex, hoverIndex } = action;
+	let newBoards;
+	let lists;
+	let tasks;
+	if (boardId) {
+		lists = boards[boardId]['lists'];
+
+		if (!boards[boardId]['lists']) {
+			boards[boardId]['lists'] = {};
+		}
+
+		if (listId) {
+			tasks = lists[listId]['tasks'];
+			if (!lists[listId]['tasks']) {
+				lists[listId]['tasks'] = [];
+			}
+		} else if (sourceListId) {
+			tasks = lists[sourceListId]['tasks'];
+			if (!lists[sourceListId]['tasks']) {
+				lists[sourceListId]['tasks'] = [];
+			}
+		}
+	}
+
 	switch(action.type) {
 		case CREATE_BOARD:
 			boards[key] = {
@@ -16,20 +41,12 @@ export default function(state = {}, action) {
 			delete boards[boardId];
 			return boards;
 		case CREATE_LIST:
-			if (!boards[boardId]['lists']) {
-				boards[boardId]['lists'] = {};
-			}
 			boards[boardId]['lists'][key] = {id: key, listName: values.name};
 			return boards;
 		case DELETE_LIST:
 			delete boards[boardId]['lists'][listId];
 			return boards;
 		case CREATE_TASK:
-			let lists = boards[boardId]['lists'];
-
-			if (!lists[listId]['tasks']) {
-				lists[listId]['tasks'] = [];
-			}
 		 	lists[listId]['tasks'].push({
 				id: key,
 				text: values
@@ -39,21 +56,44 @@ export default function(state = {}, action) {
 			boards[boardId]['lists'][listId]['tasks'].splice(index, 1);
 			return boards;
 		case MOVE_CARD:
-			const targetList = boards[boardId]['lists'][targetListId]['tasks'];
-			const sourceList = boards[boardId]['lists'][sourceListId]['tasks'];
-			const sourceCard = sourceList.filter(card => card.id === sourceTaskId)[0];
-			const sourceListIndexSearch = sourceList.indexOf(sourceCard);
-			const targetListIndexSearch = targetList.indexOf(sourceCard);
-			
-			if (sourceListIndexSearch !== -1) {
-				sourceList.splice(sourceListIndexSearch, 1);
-				targetList.splice(targetIndex, 0, sourceCard);
-			} 
-			else if (targetListIndexSearch !== -1) {
-				targetList.splice(targetListIndexSearch, 1);
-				targetList.splice(targetIndex, 0, sourceCard);
+			if (sourceListId === targetListId) {
+				const dragCard = tasks[dragIndex];
+				newBoards = update(boards, {
+					[boardId]: {
+						lists: {
+							[sourceListId]: {
+								tasks: {
+									$splice: [
+										[dragIndex, 1],
+										[hoverIndex, 0, dragCard]
+									]
+								}
+							}
+						}
+					}
+				});
+			} else if (sourceListId !== targetListId) {
+				const dragCard = tasks[dragIndex];
+				lists[sourceListId]['tasks'].splice(dragIndex, 1);
+				lists[targetListId]['tasks'].splice(hoverIndex, 0, dragCard);
 			}
-			return boards;
+			return newBoards;
+		case REMOVE_CARD:
+			newBoards = update(boards, {
+				[boardId]: {
+					lists: {
+						[listId]: {
+							tasks: {
+								$splice: [
+									[index, 1]
+								]
+							}
+						}
+					}
+				}
+			});
+			console.log(boardId, listId, index);
+			return newBoards;
 		default:
 			return state;
 	}
